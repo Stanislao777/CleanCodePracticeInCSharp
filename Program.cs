@@ -20,11 +20,11 @@ namespace ToDo
                 }
                 else if (menuSelected == 2)
                 {
-                    ShowMenuDos();
+                    ShowMenuRemove();
                 }
                 else if (menuSelected == 3)
                 {
-                    ShowMenuTres();
+                    ShowMenuMostrar();
                 }
             } while (menuSelected != 4);
         }
@@ -46,7 +46,7 @@ namespace ToDo
             return Convert.ToInt32(line);
         }
 
-        public static void ShowMenuDos()
+        public static void ShowMenuRemove()
         {
             try
             {
@@ -90,7 +90,7 @@ namespace ToDo
             }
         }
 
-        public static void ShowMenuTres()
+        public static void ShowMenuMostrar()
         {
             if (TL == null || TL.Count == 0)
             {
