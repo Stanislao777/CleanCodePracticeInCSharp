@@ -57,14 +57,12 @@ namespace ToDo
                 string line = Console.ReadLine();
                 // Remove one position
                 int indexToRemove = Convert.ToInt32(line) - 1;
-                if (indexToRemove > -1)
+                if (indexToRemove > -1 && TaskList.Count > 0)
                 {
-                    if (TaskList.Count > 0)
-                    {
-                        string task = TaskList[indexToRemove];
-                        TaskList.RemoveAt(indexToRemove);
-                        Console.WriteLine("Tarea " + task + " eliminada");
-                    }
+                    string task = TaskList[indexToRemove];
+                    TaskList.RemoveAt(indexToRemove);
+                    Console.WriteLine("Tarea " + task + " eliminada");
+            
                 }
             }
             catch (Exception)
@@ -95,10 +93,14 @@ namespace ToDo
             else
             {
                 Console.WriteLine("----------------------------------------");
+                /* Refactorizando código
                 for (int i = 0; i < TaskList.Count; i++)
                 {
                     Console.WriteLine((i + 1) + ". " + TaskList[i]);
-                }
+                }*/
+                var indexTask=0;
+                //cuando lleva ++ por delante de la variable es un preincremento
+                TaskList.ForEach(p=>Console.WriteLine(++indexTask + ". " + p));
                 Console.WriteLine("----------------------------------------");
             }
         }
