@@ -5,11 +5,12 @@ namespace ToDo
 {
     internal class Program
     {
-        public static List<string> TaskList { get; set; }
+        public static List<string> TaskList { get; set; } = TaskList = new List<string>();
 
         static void Main(string[] args)
         {
-            TaskList = new List<string>();
+            //inicializa la tarea cuando es null, ahora se lleva arriba después de = 
+            //TaskList = new List<string>();
             int menuSelected = 0;
             do
             {
@@ -64,9 +65,9 @@ namespace ToDo
                 {
                     if (indexToRemove > -1 && TaskList.Count > 0)
                     {
-                        string task = TaskList[indexToRemove];
+                        string taskToRemove = TaskList[indexToRemove];
                         TaskList.RemoveAt(indexToRemove);
-                        Console.WriteLine("Tarea " + task + " eliminada");
+                        Console.WriteLine("Tarea " + taskToRemove + " eliminada");
                 
                     }                    
                 }
@@ -93,22 +94,29 @@ namespace ToDo
 
         public static void ShowMenuMostrar()
         {
-            if (TaskList == null || TaskList.Count == 0)
+            //mejorando código
+            //if (TaskList == null || TaskList.Count == 0) luego se invierten valores
+            if (TaskList?.Count > 0) //si es null o es mayor a cero
             {
-                Console.WriteLine("No hay tareas por realizar");
+                Console.WriteLine("----------------------------------------");
+                var indexTask=0;                
+                TaskList.ForEach(p=>Console.WriteLine($"{++indexTask} . {p}"));
+
+                Console.WriteLine("----------------------------------------");
             } 
             else
             {
-                Console.WriteLine("----------------------------------------");
-                /* Refactorizando código
-                for (int i = 0; i < TaskList.Count; i++)
-                {
-                    Console.WriteLine((i + 1) + ". " + TaskList[i]);
-                }*/
+                /*Console.WriteLine("----------------------------------------");
+                // Refactorizando código
+                //for (int i = 0; i < TaskList.Count; i++)
+                //{
+                //    Console.WriteLine((i + 1) + ". " + TaskList[i]);
+                //}
                 var indexTask=0;
-                //cuando lleva ++ por delante de la variable es un preincremento
-                TaskList.ForEach(p=>Console.WriteLine(++indexTask + ". " + p));
-                Console.WriteLine("----------------------------------------");
+                //Mejorando código de interpolación de cadenas (cuando lleva ++ por delante de la variable es un preincremento)
+                TaskList.ForEach(p=>Console.WriteLine($"{++indexTask} . {p}"));
+                Console.WriteLine("----------------------------------------");*/
+                Console.WriteLine("No hay tareas por realizar");
             }
         }
     }
