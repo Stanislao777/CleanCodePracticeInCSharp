@@ -1,7 +1,5 @@
 ﻿List<string> TaskList = new List<string>();
     
-//inicializa la tarea cuando es null, ahora se lleva arriba después de = 
-//TaskList = new List<string>();
 int menuSelected = 0;
 do
 {
@@ -19,11 +17,12 @@ do
         ShowMenuMostrar();
     }
 }while ((Menu)menuSelected != Menu.Exit);
+
+/// <summaty>
+/// Show the options for Task, 1. Nueva tarea
+/// </sumary>
+/// <returns> Returns option selected by user </returns>
     
-/// <summary>
-/// Show the main menu 
-/// </summary>
-/// <returns>Returns option indicated by user</returns>
 int ShowMainMenu()
 {
     Console.WriteLine("----------------------------------------");
@@ -32,10 +31,9 @@ int ShowMainMenu()
     Console.WriteLine("2. Remover tarea");
     Console.WriteLine("3. Tareas pendientes");
     Console.WriteLine("4. Salir");
-
-    // Read line
-    string line = Console.ReadLine();
-    return Convert.ToInt32(line);
+   
+    string menuSelected = Console.ReadLine();
+    return Convert.ToInt32(menuSelected);
 }
 
 void ShowMenuRemove()
@@ -43,12 +41,12 @@ void ShowMenuRemove()
     try
     {
         Console.WriteLine("Ingrese el número de la tarea a remover: ");
-        // Show current taks
         ShowMenuMostrar();
 
-        string line = Console.ReadLine();
-        // Remove one position
-        int indexToRemove = Convert.ToInt32(line) - 1;
+        string taskNumberToDelete = Console.ReadLine();
+
+        //remove one position because the array starts in 0
+        int indexToRemove = Convert.ToInt32(taskNumberToDelete) - 1;
 
         if (indexToRemove > (TaskList.Count -1) || indexToRemove < 0) 
         Console.WriteLine("Numero de tarea seleccionado no es validdo");
@@ -84,10 +82,8 @@ void ShowMenuAdd()
 }
 
 void ShowMenuMostrar()
-{
-    //mejorando código
-    //if (TaskList == null || TaskList.Count == 0) luego se invierten valores
-    if (TaskList?.Count > 0) //si es null o es mayor a cero
+{    
+    if (TaskList?.Count > 0)
     {
         Console.WriteLine("----------------------------------------");
         var indexTask=0;                
@@ -97,16 +93,6 @@ void ShowMenuMostrar()
     } 
     else
     {
-        /*Console.WriteLine("----------------------------------------");
-        // Refactorizando código
-        //for (int i = 0; i < TaskList.Count; i++)
-        //{
-        //    Console.WriteLine((i + 1) + ". " + TaskList[i]);
-        //}
-        var indexTask=0;
-        //Mejorando código de interpolación de cadenas (cuando lleva ++ por delante de la variable es un preincremento)
-        TaskList.ForEach(p=>Console.WriteLine($"{++indexTask} . {p}"));
-        Console.WriteLine("----------------------------------------");*/
         Console.WriteLine("No hay tareas por realizar");
     }
 }
